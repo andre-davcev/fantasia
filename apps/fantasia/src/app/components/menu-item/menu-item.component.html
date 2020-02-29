@@ -1,0 +1,5 @@
+<a class="cpt-link cpt-frosted-glass" [@hover]="animation" *ngIf="app">
+  <img class="cpt-avatar" alt="{{app.display | translate}}" height="64" width="64" [src]="app.icon">
+  <h3 class="cpt-header">{{app.display | translate}}</h3>
+  <p class="cpt-description">{{app.description | translate}}</p>
+</a>

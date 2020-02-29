@@ -1,0 +1,202 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "fantasia": {
+      "root": "apps/fantasia",
+      "sourceRoot": "apps/fantasia/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/fantasia",
+            "index": "apps/fantasia/src/index.html",
+            "main": "apps/fantasia/src/main.ts",
+            "tsConfig": "apps/fantasia/tsconfig.app.json",
+            "polyfills": "apps/fantasia/src/polyfills.ts",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules",
+                "libs/sass",
+                "apps/fantasia/src/styles"
+              ]
+            },
+            "assets": [
+              "apps/fantasia/src/assets"
+            ],
+            "styles": [
+              "node_modules/normalize.css/normalize.css",
+              "libs/sass/blueprint-reset.scss",
+              "apps/fantasia/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/fantasia/src/environments/environment.ts",
+                  "with": "apps/fantasia/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "fantasia:build",
+            "port": 4300
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fantasia:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "fantasia:build"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/fantasia/jest.config.js",
+            "tsConfig": "apps/fantasia/tsconfig.spec.json",
+            "setupFile": "apps/fantasia/src/test-setup.ts",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules",
+                "libs/sass",
+                "apps/fantasia/src/styles"
+              ]
+            },
+            "styles": [
+              "node_modules/normalize.css/normalize.css",
+              "libs/sass/blueprint-reset.scss",
+              "apps/fantasia/src/styles.scss"
+            ],
+            "assets": [
+              "apps/fantasia/src/assets",
+              "apps/fantasia/src/favicon.ico"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/fantasia/tsconfig.app.json",
+              "apps/fantasia/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      },
+      "prefix": "app"
+    },
+    "fantasia-e2e": {
+      "root": "apps/fantasia-e2e",
+      "sourceRoot": "apps/fantasia-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/fantasia-e2e/protractor.conf.js",
+            "devServerTarget": "fantasia:serve"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/fantasia-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      },
+      "prefix": "app"
+    },
+    "blueprint": {
+      "root": "libs/blueprint",
+      "sourceRoot": "libs/blueprint/src",
+      "projectType": "library",
+      "prefix": "blu",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/blueprint/tsconfig.lib.json",
+            "project": "libs/blueprint/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/blueprint/tsconfig.lib.json",
+              "libs/blueprint/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/blueprint/jest.config.js",
+            "tsConfig": "libs/blueprint/tsconfig.spec.json"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    }
+  },
+  "defaultProject": "fantasia",
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false
+    },
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@schematics/angular": {
+      "styleExt": "scss"
+    },
+    "@nrwl/schematics:library": {
+      "unitTestRunner": "jest",
+      "framework": "angular"
+    },
+    "@nrwl/schematics:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "protractor"
+    },
+    "@nrwl/schematics:node-application": {
+      "framework": "express"
+    }
+  }
+}

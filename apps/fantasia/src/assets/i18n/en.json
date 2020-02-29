@@ -1,0 +1,28 @@
+{
+  "app.firefly.title": "Firefly",
+  "app.firefly.description": "Location aware mobile app created by myself and David Beaton",
+
+  "app.resume.title": "Resume",
+  "app.resume.description": "A downloadable resume and list of skill proficiencies",
+
+  "app.soundtrack-mixes.title": "Soundtrack Mixes",
+  "app.soundtrack-mixes.description": "Select your mood and experience a soundtrack to match",
+
+  "app.family-tree.title": "Family Tree",
+  "app.family-tree.description": "A visualization of my family tree",
+
+  "app.photos.title": "Photos",
+  "app.photos.description": "A selection of my favorite photos of family and friends",
+
+  "app.starcraft.title": "Starcraft",
+  "app.starcraft.description": "Charting my progress on the Starcraft 2 ladder",
+
+  "app.books.title": "Books",
+  "app.books.description": "A selection of top books by genre selected from my library",
+
+  "app.movies.title": "Movies",
+  "app.movies.description": "My favorite movies of all time split up by genre",
+
+  "app.blog.title": "Blog",
+  "app.blog.description": "A blog about life, politics, religion and other random things"
+}

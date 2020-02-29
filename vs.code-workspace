@@ -1,0 +1,46 @@
+{
+  "folders": [
+    {
+      "path": "../../Library/Application Support/Blizzard/Starcraft II",
+      "name": "starcraft"
+    },
+    {
+      "path": "."
+    }
+  ],
+
+  "settings": {
+    "html.format.enable": false,
+    "json.format.enable": false,
+    "typescript.format.enable": true,
+    "javascript.format.enable": true,
+    "workbench.iconTheme": "material-icon-theme",
+
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSaveTimeout": 4000,
+    "window.zoomLevel": 0,
+    "html.format.wrapAttributes": "force-aligned",
+    "html.format.wrapLineLength": 80,
+    "files.eol": "\n",
+    "search.exclude": {
+      "**/node_modules": true
+    },
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#ab307e",
+      "activityBar.activeBorder": "#25320e",
+      "activityBar.foreground": "#e7e7e7",
+      "activityBar.inactiveForeground": "#e7e7e799",
+      "activityBarBadge.background": "#25320e",
+      "activityBarBadge.foreground": "#e7e7e7",
+      "titleBar.activeBackground": "#832561",
+      "titleBar.inactiveBackground": "#83256199",
+      "titleBar.activeForeground": "#e7e7e7",
+      "titleBar.inactiveForeground": "#e7e7e799",
+      "statusBar.background": "#832561",
+      "statusBarItem.hoverBackground": "#ab307e",
+      "statusBar.foreground": "#e7e7e7"
+    },
+    "peacock.color": "#832561"
+  }
+}
