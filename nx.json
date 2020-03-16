@@ -12,7 +12,8 @@
       "tags": []
     },
     "fantasia-e2e": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["fantasia"]
     },
     "blueprint": {
       "tags": []

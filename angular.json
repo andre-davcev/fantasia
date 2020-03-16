@@ -11,6 +11,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/apps/fantasia",
             "index": "apps/fantasia/src/index.html",
             "main": "apps/fantasia/src/main.ts",
@@ -23,9 +24,7 @@
                 "apps/fantasia/src/styles"
               ]
             },
-            "assets": [
-              "apps/fantasia/src/assets"
-            ],
+            "assets": ["apps/fantasia/src/assets"],
             "styles": [
               "node_modules/normalize.css/normalize.css",
               "libs/sass/blueprint-reset.scss",
@@ -35,6 +34,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -92,7 +97,8 @@
             "assets": [
               "apps/fantasia/src/assets",
               "apps/fantasia/src/favicon.ico"
-            ]
+            ],
+            "passWithNoTests": true
           }
         },
         "lint": {
@@ -102,9 +108,7 @@
               "apps/fantasia/tsconfig.app.json",
               "apps/fantasia/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/fantasia/**"]
           }
         }
       },
@@ -125,12 +129,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/fantasia-e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["apps/fantasia-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/fantasia-e2e/**"]
           }
         }
       },
@@ -143,7 +143,7 @@
       "prefix": "blu",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/blueprint/tsconfig.lib.json",
             "project": "libs/blueprint/ng-package.json"
@@ -156,16 +156,15 @@
               "libs/blueprint/tsconfig.lib.json",
               "libs/blueprint/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/blueprint/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/blueprint/jest.config.js",
-            "tsConfig": "libs/blueprint/tsconfig.spec.json"
+            "tsConfig": "libs/blueprint/tsconfig.spec.json",
+            "passWithNoTests": true
           }
         }
       },
