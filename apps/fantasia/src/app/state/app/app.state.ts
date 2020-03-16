@@ -26,30 +26,44 @@ import { ServiceApp } from '@fantasia/app/services';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { tap } from 'rxjs/operators';
 import { MaterialBreakpoint } from '@fantasia/app/enums/material-breakpoint.enum';
+import { Injectable } from '@angular/core';
 
 @State<StateAppModel>(StateAppOptions)
+@Injectable()
 export class StateApp {
-
-  @Selector() static home(state: StateAppModel): boolean { return state.home; }
-  @Selector() static loading(state: StateAppModel): boolean { return state.loading; }
-  @Selector() static appLookup(state: StateAppModel): Record<App, AppProperties> { return state.apps; }
+  @Selector() static home(state: StateAppModel): boolean {
+    return state.home;
+  }
+  @Selector() static loading(state: StateAppModel): boolean {
+    return state.loading;
+  }
+  @Selector() static appLookup(
+    state: StateAppModel
+  ): Record<App, AppProperties> {
+    return state.apps;
+  }
   @Selector() static apps(state: StateAppModel): Array<AppProperties> {
     const appLookup: Record<App, AppProperties> = StateApp.appLookup(state);
 
     return ServiceApp.toArray(appLookup);
   }
-  @Selector() static mediaChanges(state: StateAppModel): Array<MediaChange> { return state.mediaChanges; }
-  @Selector() static mediaChangesFound(state: StateAppModel): boolean { return StateApp.mediaChanges(state).length > 0; }
+  @Selector() static mediaChanges(state: StateAppModel): Array<MediaChange> {
+    return state.mediaChanges;
+  }
+  @Selector() static mediaChangesFound(state: StateAppModel): boolean {
+    return StateApp.mediaChanges(state).length > 0;
+  }
   @Selector() static mediaBreakpoint(state: StateAppModel): MaterialBreakpoint {
-    return StateApp.mediaChangesFound(state) ? state.mediaChanges[0].mqAlias as MaterialBreakpoint : undefined;
+    return StateApp.mediaChangesFound(state)
+      ? (state.mediaChanges[0].mqAlias as MaterialBreakpoint)
+      : undefined;
   }
 
-  constructor
-  (
-      private router: Router,
-      private app: ServiceApp,
-      private mediaObserver: MediaObserver
-  ) { }
+  constructor(
+    private router: Router,
+    private app: ServiceApp,
+    private mediaObserver: MediaObserver
+  ) {}
 
   public ngxsOnInit(context: StateContext<StateAppModel>) {
     context.dispatch([
@@ -60,8 +74,13 @@ export class StateApp {
   }
 
   @Action(ActionAppLoad)
-  loadApps({ patchState }: StateContext<StateAppModel>, { payload }: ActionAppLoad) {
-    const apps: Record<string, AppProperties> = this.app.generateLookup(payload);
+  loadApps(
+    { patchState }: StateContext<StateAppModel>,
+    { payload }: ActionAppLoad
+  ) {
+    const apps: Record<string, AppProperties> = this.app.generateLookup(
+      payload
+    );
 
     patchState({ apps });
   }
@@ -105,15 +124,16 @@ export class StateApp {
 
   @Action(ActionAppWatchMediaBreakpoints, { cancelUncompleted: true })
   watchMediaBreakpoints({ patchState }: StateContext<StateAppModel>) {
-    const mqAlias: string = Object.
-      keys(MaterialBreakpoint).
-      map((key: string) => MaterialBreakpoint[key]).
-      find((alias: string) => this.mediaObserver.isActive(alias));
+    const mqAlias: string = Object.keys(MaterialBreakpoint)
+      .map((key: string) => MaterialBreakpoint[key])
+      .find((alias: string) => this.mediaObserver.isActive(alias));
 
     patchState({ mediaChanges: [{ mqAlias } as MediaChange] });
 
-    return this.mediaObserver.asObservable().pipe(
-      tap((mediaChanges: Array<MediaChange>) => patchState({ mediaChanges }))
-    );
+    return this.mediaObserver
+      .asObservable()
+      .pipe(
+        tap((mediaChanges: Array<MediaChange>) => patchState({ mediaChanges }))
+      );
   }
 }

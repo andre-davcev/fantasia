@@ -13,7 +13,7 @@ import { MaterialBreakpoint } from '@fantasia/app/enums';
   styleUrls: ['./menu.component.scss']
 })
 export class ComponentMenu implements OnInit {
-  @Select(StateApp.apps) apps$: Observable<AppProperties>;
+  @Select(StateApp.apps) apps$: Observable<Array<AppProperties>>;
   @Select(StateApp.home) home$: Observable<boolean>;
   @Select(StateApp.mediaBreakpoint) breakpoint$: Observable<MaterialBreakpoint>;
 
@@ -28,11 +28,13 @@ export class ComponentMenu implements OnInit {
   public columns$: Observable<number>;
   public gridClass$: Observable<string>;
 
-  constructor(private store: Store) { }
+  constructor(private store: Store) {}
 
   public ngOnInit(): void {
     this.columns$ = combineLatest([this.breakpoint$, this.home$]).pipe(
-      map(([breakpoint, home]) => home ? this.breakpointColumns[breakpoint] : 1)
+      map(([breakpoint, home]) =>
+        home ? this.breakpointColumns[breakpoint] : 1
+      )
     );
 
     this.gridClass$ = this.breakpoint$.pipe(
