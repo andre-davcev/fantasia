@@ -1,4 +1,4 @@
-import { createService } from '@netbasal/spectator/jest';
+import { createService } from '@ngneat/spectator/jest';
 
 import { AppList, App, AppProperties, ServiceApp } from '@fantasia/app';
 
@@ -10,7 +10,9 @@ describe('ServiceApp', () => {
   });
 
   it('should generate an app lookup', () => {
-    const lookup: Record<App, AppProperties> = spectator.service.generateLookup(AppList);
+    const lookup: Record<App, AppProperties> = spectator.service.generateLookup(
+      AppList
+    );
 
     const original: AppProperties = AppList[0];
     const app: AppProperties = lookup[original.key];
@@ -29,10 +31,12 @@ describe('ServiceApp', () => {
     AppList[1].iconExtension = 'jpg';
 
     const secondKey: string = AppList[1].key;
-    const apps: Array<AppProperties> = ServiceApp.toArray(spectator.service.generateLookup(AppList));
+    const apps: Array<AppProperties> = ServiceApp.toArray(
+      spectator.service.generateLookup(AppList)
+    );
     const app: AppProperties = apps[1];
 
     expect(app.key).toBe(secondKey);
     expect(app.icon).toBe(`assets/icons/128/${app.key}.${app.iconExtension}`);
-  })
+  });
 });

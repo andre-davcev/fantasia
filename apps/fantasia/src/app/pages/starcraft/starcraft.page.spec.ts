@@ -1,5 +1,5 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { Spectator, createTestComponentFactory } from '@netbasal/spectator/jest';
+import { Spectator, createTestComponentFactory } from '@ngneat/spectator/jest';
 
 import { ModulePageStarcraft, PageStarcraft } from '@fantasia/app';
 
@@ -8,17 +8,13 @@ describe('PageStarcraft', () => {
 
   const createComponent = createTestComponentFactory({
     component: PageStarcraft,
-    imports: [
-      RouterTestingModule,
-      ModulePageStarcraft
-    ],
+    imports: [RouterTestingModule, ModulePageStarcraft],
     declareComponent: false
   });
 
-  beforeEach(() => spectator = createComponent());
+  beforeEach(() => (spectator = createComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();
   });
 });
-

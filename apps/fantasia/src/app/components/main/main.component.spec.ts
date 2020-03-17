@@ -1,6 +1,6 @@
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Spectator, createTestComponentFactory } from '@netbasal/spectator/jest';
+import { Spectator, createTestComponentFactory } from '@ngneat/spectator/jest';
 import { NgxsModule } from '@ngxs/store';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -21,7 +21,7 @@ describe('ComponentMain', () => {
     declareComponent: false
   });
 
-  beforeEach(() => spectator = createComponent());
+  beforeEach(() => (spectator = createComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();

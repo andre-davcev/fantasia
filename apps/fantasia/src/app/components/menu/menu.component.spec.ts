@@ -7,7 +7,13 @@ import { NgxsModule, Store } from '@ngxs/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { createTestComponentFactory, Spectator, createService, SpectatorService } from '@netbasal/spectator/jest';
+import {
+  createTestComponentFactory,
+  Spectator,
+  SpectatorService,
+  SpectatorServiceFactory,
+  createServiceFactory
+} from '@ngneat/spectator/jest';
 
 import {
   AppList,
@@ -24,8 +30,10 @@ import {
 } from '@fantasia/app';
 
 describe('ComponentMenu', () => {
-
-  const store: SpectatorService<Store> = createService<Store>(Store);
+  let store: SpectatorService<Store>;
+  const createStore: SpectatorServiceFactory<Store> = createServiceFactory<
+    Store
+  >(Store);
 
   let spectator: Spectator<ComponentMenu>;
 
@@ -42,7 +50,8 @@ describe('ComponentMenu', () => {
   });
 
   beforeEach(() => {
-    store.service.reset({[StateApp.name]: StateAppOptions.defaults});
+    store = createStore();
+    store.service.reset({ [StateApp.name]: StateAppOptions.defaults });
     store.service.dispatch(new ActionAppLoad(AppList));
 
     spectator = createComponent();
@@ -55,36 +64,52 @@ describe('ComponentMenu', () => {
   it('should create grid', async(() => {
     store.service.dispatch(new ActionAppNavToHome());
     const breakpoint: MaterialBreakpoint = MaterialBreakpoint.Large;
-    Object.defineProperty(spectator.component, 'breakpoint$', { value: of(breakpoint) });
+    Object.defineProperty(spectator.component, 'breakpoint$', {
+      value: of(breakpoint)
+    });
 
     spectator.component.ngOnInit();
     spectator.fixture.whenStable().then(() => {
       spectator.fixture.detectChanges();
 
-      const grid: HTMLElement = spectator.debugElement.query(By.css('mat-grid-list')).nativeElement;
-      const tiles: Array<DebugElement> = spectator.debugElement.queryAll(By.css('mat-grid-tile'));
+      const grid: HTMLElement = spectator.debugElement.query(
+        By.css('mat-grid-list')
+      ).nativeElement;
+      const tiles: Array<DebugElement> = spectator.debugElement.queryAll(
+        By.css('mat-grid-tile')
+      );
 
       expect(grid.classList.contains(`cpt-${breakpoint}`)).toBe(true);
       expect(tiles.length).toBe(AppList.length);
 
-      spectator.component.columns$.pipe(take(1)).subscribe((columns: number) => {
-        expect(grid.getAttribute('ng-reflect-cols')).toBe(`${spectator.component.breakpointColumns[breakpoint]}`);
-        expect(columns).toBe(spectator.component.breakpointColumns[breakpoint])
-      });
-    })
+      spectator.component.columns$
+        .pipe(take(1))
+        .subscribe((columns: number) => {
+          expect(grid.getAttribute('ng-reflect-cols')).toBe(
+            `${spectator.component.breakpointColumns[breakpoint]}`
+          );
+          expect(columns).toBe(
+            spectator.component.breakpointColumns[breakpoint]
+          );
+        });
+    });
   }));
 
   it('should have 1 column', async(() => {
     store.service.dispatch(new ActionAppNavToChild(App.Books));
     const breakpoint: MaterialBreakpoint = MaterialBreakpoint.Large;
-    Object.defineProperty(spectator.component, 'breakpoint$', { value: of(breakpoint) });
+    Object.defineProperty(spectator.component, 'breakpoint$', {
+      value: of(breakpoint)
+    });
     spectator.component.ngOnInit();
 
     spectator.fixture.whenStable().then(() => {
-        spectator.fixture.detectChanges();
+      spectator.fixture.detectChanges();
 
-        spectator.component.columns$.pipe(take(1)).subscribe((columns: number) => {
-          expect(columns).toBe(1)
+      spectator.component.columns$
+        .pipe(take(1))
+        .subscribe((columns: number) => {
+          expect(columns).toBe(1);
         });
     });
   }));
@@ -96,9 +121,10 @@ describe('ComponentMenu', () => {
     spectator.component.home();
     spectator.fixture.detectChanges();
 
-    store.service.selectOnce((state: any) => state[StateAppOptions.name]).
-    subscribe((state: StateAppModel) => {
-      expect(StateApp.home(state)).toBe(true);
-    });
+    store.service
+      .selectOnce((state: any) => state[StateAppOptions.name as string])
+      .subscribe((state: StateAppModel) => {
+        expect(StateApp.home(state)).toBe(true);
+      });
   }));
 });

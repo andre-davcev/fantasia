@@ -1,5 +1,5 @@
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Spectator, createTestComponentFactory } from '@netbasal/spectator/jest';
+import { Spectator, createTestComponentFactory } from '@ngneat/spectator/jest';
 
 import { Animation, ComponentLogo, ModuleComponentLogo } from '@fantasia/app';
 
@@ -8,18 +8,15 @@ describe('LogoComponent', () => {
 
   const createComponent = createTestComponentFactory({
     component: ComponentLogo,
-    imports: [
-      ModuleComponentLogo,
-      NoopAnimationsModule
-    ],
+    imports: [ModuleComponentLogo, NoopAnimationsModule],
     declareComponent: false
   });
 
-  beforeEach(() => spectator = createComponent());
+  beforeEach(() => (spectator = createComponent()));
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();
-    expect(spectator.component.animation).toBe(Animation.Default)
+    expect(spectator.component.animation).toBe(Animation.Default);
   });
 
   it('should test mouse hover', () => {
