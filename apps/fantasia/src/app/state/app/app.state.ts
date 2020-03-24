@@ -90,13 +90,17 @@ export class StateApp {
     { getState, patchState, dispatch }: StateContext<StateAppModel>,
     { payload }: ActionAppNavToChild
   ) {
-    const appProperties: AppProperties = getState().apps[payload];
+    const appProperties: AppProperties = StateApp.appLookup(getState())[
+      payload
+    ];
 
-    if (appProperties.link != null) {
-      window.open(appProperties.link);
-    } else {
-      patchState({ home: false });
-      dispatch(new Navigate([payload]));
+    if (appProperties) {
+      if (appProperties.link != null) {
+        window.open(appProperties.link);
+      } else {
+        patchState({ home: false });
+        dispatch(new Navigate([payload]));
+      }
     }
   }
 

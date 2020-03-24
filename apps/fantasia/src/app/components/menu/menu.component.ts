@@ -21,8 +21,8 @@ export class ComponentMenu implements OnInit {
     [MaterialBreakpoint.ExtraSmall]: 1,
     [MaterialBreakpoint.Small]: 2,
     [MaterialBreakpoint.Medium]: 3,
-    [MaterialBreakpoint.Large]: 4,
-    [MaterialBreakpoint.ExtraLarge]: 4
+    [MaterialBreakpoint.Large]: 3,
+    [MaterialBreakpoint.ExtraLarge]: 3
   };
 
   public columns$: Observable<number>;
