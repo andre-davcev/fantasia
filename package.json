@@ -27,7 +27,8 @@
     "fan-serve": "ng serve fantasia --port=4201 --aot --open",
     "postinstall": "node apps/fantasia/scripts/version.ts",
     "outdated": "npm outdated",
-    "nx": "nx"
+    "nx": "nx",
+    "firebase-token": "firebase login:ci"
   },
   "private": true,
   "dependencies": {
