@@ -1,11 +1,11 @@
-@import "app-variables";
+@import 'app-variables';
 
 $cpt-color: rgb(255, 255, 255);
 $cpt-color-alpha: darken($cpt-color, 0);
 $cpt-color-base: rgba(255, 255, 255, 1);
 
 :host {
-  --cpt-logo-color: rgba(255, 255, 255, 0.92);
+  --cpt-logo-color: rgba(0, 0, 0, 0.92);
   --cpt-logo-font-family: var(--app-font-lobster);
   --cpt-logo-font-size: 2.2rem;
   --cpt-logo-width: 76px;
@@ -46,4 +46,3 @@ $cpt-color-base: rgba(255, 255, 255, 1);
     }
   }
 }
-
