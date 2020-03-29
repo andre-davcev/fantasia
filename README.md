@@ -4,7 +4,7 @@ This is my personal sandbox project which you can find at [andredavcev.com](http
 
 ## Technology Stack
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) using [Nrwl Nx](https://nrwl.io/nx). Every push to the master branch triggers continuous integration using [Circle CI](https://circleci.com/). This Angular application is currently on version 8+ and utilizes various TypeScript libraries. [RxJS](https://rxjs-dev.firebaseapp.com/) is used extensively throughout the code and am using [NGXS](https://ngxs.gitbook.io/ngxs) for state management.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) using [Nrwl Nx](https://nrwl.io/nx). Every push to the master branch triggers continuous integration using [Circle CI](https://circleci.com/). This Angular application is currently on version 9+ and utilizes various TypeScript libraries. [RxJS](https://rxjs-dev.firebaseapp.com/) is used extensively throughout the code and am using [NGXS](https://ngxs.gitbook.io/ngxs) for state management.
 
 ## Quick Start & Documentation
 
