@@ -1,10 +1,6 @@
 {
   "folders": [
     {
-      "path": "../../Library/Application Support/Blizzard/Starcraft II",
-      "name": "starcraft"
-    },
-    {
       "path": "."
     }
   ],
