@@ -20,9 +20,9 @@ export class ComponentMenu implements OnInit {
   public breakpointColumns: Record<string, number> = {
     [MaterialBreakpoint.ExtraSmall]: 1,
     [MaterialBreakpoint.Small]: 2,
-    [MaterialBreakpoint.Medium]: 3,
-    [MaterialBreakpoint.Large]: 3,
-    [MaterialBreakpoint.ExtraLarge]: 3
+    [MaterialBreakpoint.Medium]: 2,
+    [MaterialBreakpoint.Large]: 2,
+    [MaterialBreakpoint.ExtraLarge]: 2
   };
 
   public columns$: Observable<number>;

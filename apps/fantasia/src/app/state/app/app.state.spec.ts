@@ -131,7 +131,7 @@ describe('StateApp', () => {
 
     store.service.dispatch([
       new ActionAppLoad(AppList),
-      new ActionAppNavToChild(App.Blog)
+      new ActionAppNavToChild(App.Firefly)
     ]);
 
     store.service
@@ -139,7 +139,7 @@ describe('StateApp', () => {
       .subscribe((state: StateAppModel) => {
         expect(StateApp.home(state)).toBe(true);
         expect(window.open).toBeCalledWith(
-          StateApp.appLookup(state)[App.Blog].link
+          StateApp.appLookup(state)[App.Firefly].link
         );
       });
   }));

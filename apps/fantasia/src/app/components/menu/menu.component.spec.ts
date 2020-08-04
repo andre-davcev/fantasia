@@ -96,7 +96,7 @@ describe('ComponentMenu', () => {
   }));
 
   it('should have 1 column', async(() => {
-    store.service.dispatch(new ActionAppNavToChild(App.Books));
+    store.service.dispatch(new ActionAppNavToChild(App.Resume));
     const breakpoint: MaterialBreakpoint = MaterialBreakpoint.Large;
     Object.defineProperty(spectator.component, 'breakpoint$', {
       value: of(breakpoint)
@@ -115,7 +115,7 @@ describe('ComponentMenu', () => {
   }));
 
   it('should navigate home', async(() => {
-    store.service.dispatch(new ActionAppNavToChild(App.Books));
+    store.service.dispatch(new ActionAppNavToChild(App.Resume));
     spectator.fixture.detectChanges();
 
     spectator.component.home();
