@@ -4,8 +4,7 @@ import { App } from '@fantasia/app/enums';
 import {
   ModuleComponentMain,
   ModulePageResume,
-  ModulePageStarcraft,
-  ModulePageMovies
+  ModulePageStarcraft
 } from '@fantasia/app';
 
 export const RoutesApp: Routes = [
@@ -21,9 +20,5 @@ export const RoutesApp: Routes = [
   {
     path: App.Starcraft,
     loadChildren: () => ModulePageStarcraft
-  },
-  {
-    path: App.Movies,
-    loadChildren: () => ModulePageMovies
   }
 ];
